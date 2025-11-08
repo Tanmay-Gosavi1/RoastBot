@@ -5,7 +5,7 @@ import { MdChat, MdDelete } from "react-icons/md"
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const Sidebar = ({ isOpen, onToggle, onNewChat, currentChatId }) => {
+const Sidebar = ({ isOpen, onToggle, onNewChat, currentChatId, setCurrentChatId, setMessages}) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [chatHistory, setChatHistory] = useState([])
   const [loading, setLoading] = useState(false)
@@ -33,6 +33,24 @@ const Sidebar = ({ isOpen, onToggle, onNewChat, currentChatId }) => {
   const truncateText = (text, maxLength = 40) => {
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
   }
+
+
+  const handleChatClick = async(chatId) => {
+    try {
+      const res = await axios.get(import.meta.env.VITE_API_URL + `/api/chat`, {
+        params: { chatId : chatId }
+      })
+        setMessages([
+          { role: 'user', content: res.data.chat.prompt },
+          { role: 'assistant', content: res.data.chat.response }
+        ])
+        setCurrentChatId(chatId)
+      }
+     catch (error) {
+      console.log(error)
+    }
+  }
+
 
   return (
     <>
@@ -113,7 +131,8 @@ const Sidebar = ({ isOpen, onToggle, onNewChat, currentChatId }) => {
             ) : (
               <div className="space-y-2">
                 {filteredHistory.map((chat, index) => (
-                  <div
+                  <div 
+                    onClick={() => handleChatClick(chat._id)}
                     key={index}
                     className={`group relative p-3 rounded-lg cursor-pointer transition-all duration-200 hover:bg-gradient-to-r hover:from-gray-800/50 hover:via-gray-900/30 hover:to-gray-800/50 border border-transparent hover:border-gray-700/50 shadow-sm hover:shadow-md ${
                       currentChatId === chat._id ? 'bg-gradient-to-r from-gray-800/50 via-gray-900/30 to-gray-800/50 border-gray-700/50' : ''

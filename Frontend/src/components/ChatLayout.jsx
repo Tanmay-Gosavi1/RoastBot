@@ -6,6 +6,7 @@ import ChatInterface from './ChatInterface'
 const ChatLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentChatId, setCurrentChatId] = useState(null)
+  const [messages, setMessages] = useState([])
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen)
@@ -32,11 +33,15 @@ const ChatLayout = () => {
         onToggle={toggleSidebar}
         onNewChat={handleNewChat}
         currentChatId={currentChatId}
+        setCurrentChatId={setCurrentChatId}
+        setMessages={setMessages}
       />
 
       {/* Main Chat Area */}
       <ChatInterface 
         sidebarOpen={sidebarOpen}
+        messages={messages}
+        setMessages={setMessages}
       />
     </div>
   )
