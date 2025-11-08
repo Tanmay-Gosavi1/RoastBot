@@ -24,6 +24,7 @@ const geminiWrapper = async (req, res) => {
         - Make the roast feel personal even when it's not.
         - Add emojis as seasoning
         - Add desi Indian humor references where possible.
+        - Keep it short under 150 words
         Now roast the following prompt like you're headlining a comedy show:
         "${prompt}"
     `;
