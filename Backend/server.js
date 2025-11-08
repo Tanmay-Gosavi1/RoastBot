@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 require('dotenv').config()
-const {geminiWrapper , getHistory} = require('./controllers/gemini.js')
+const {geminiWrapper , getHistory , getChat} = require('./controllers/gemini.js')
 const connectDB = require('./config/db.js')
 
 //Middlewares
@@ -13,6 +13,7 @@ app.use(express.urlencoded({extended : true}))
 //Routes
 app.use('/api/route' , geminiWrapper)
 app.use('/api/history' , getHistory)
+app.get('/api/chat' , getChat)
 //Database connection
 connectDB()
 

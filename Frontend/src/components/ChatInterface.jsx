@@ -6,8 +6,7 @@ import { MdRefresh } from 'react-icons/md'
 import Auth from '../authent/Authe'
 import { toast } from 'react-toastify'
 
-const ChatInterface = ({ sidebarOpen }) => {
-  const [messages, setMessages] = useState([])
+const ChatInterface = ({ sidebarOpen , messages , setMessages }) => {
   const [inputMessage, setInputMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
