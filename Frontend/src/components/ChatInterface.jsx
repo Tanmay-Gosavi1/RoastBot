@@ -4,6 +4,7 @@ import ReactMarkDown from 'react-markdown'
 import { FaPaperPlane, FaRobot, FaUser, FaCopy, FaThumbsUp, FaThumbsDown } from 'react-icons/fa'
 import { MdRefresh } from 'react-icons/md'
 import Auth from '../authent/Authe'
+import { toast } from 'react-toastify'
 
 const ChatInterface = ({ sidebarOpen }) => {
   const [messages, setMessages] = useState([])
@@ -84,7 +85,7 @@ const ChatInterface = ({ sidebarOpen }) => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text)
-
+    toast.success('Copied to clipboard!')
   }
 
   const regenerateResponse = async (messageId) => {

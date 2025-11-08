@@ -16,6 +16,10 @@ app.use('/api/history' , getHistory)
 //Database connection
 connectDB()
 
+app.get('/' , (req,res)=>{
+    res.send('Server is running')
+})
+
 port = process.env.PORT || 5001 
 app.listen(port , ()=>{
     console.log(`Server is listening at ${port}`)
